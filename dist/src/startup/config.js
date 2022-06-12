@@ -25,25 +25,19 @@ var __importStar = (this && this.__importStar) || function (mod) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const bodyParser = __importStar(require("body-parser"));
 const general_routes_1 = __importDefault(require("../routes/general-routes"));
-class expressConfig {
-    constructor() {
-        this.app = (0, express_1.default)();
-        this.port = process.env.PORT;
-    }
-    init() {
-        this.app.use(express_1.default.json());
-        this.app.use(bodyParser.json());
-        this.app.get("/", (req, res) => {
-            res.send("Express + TypeScript Server");
-        });
-        this.app.use("/api", general_routes_1.default);
-        this.app.listen(this.port, () => {
-            console.log(`⚡️[server]: Server is running at http://localhost:${this.port}`);
-        });
-    }
-}
-exports.default = expressConfig;
+let app = (0, express_1.default)();
+let port = process.env.PORT;
+module.exports = () => {
+    app.use(express_1.default.json());
+    app.use(bodyParser.json());
+    app.get("/", (req, res) => {
+        res.send("Express + TypeScript Server");
+    });
+    app.use("/api", general_routes_1.default);
+    app.listen(port, () => {
+        console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
+    });
+};

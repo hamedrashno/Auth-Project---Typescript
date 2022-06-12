@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
-import ExpressConfig from "./src/startup/config";
-import db from "./src/startup/db";
+import expressConfig from "./src/startup/config";
+import dbConfig from "./src/startup/db";
 dotenv.config();
-new ExpressConfig().init();
-db();
+expressConfig()
+dbConfig();
